@@ -5,10 +5,10 @@ from typing import TypedDict , Annotated
 from langchain_core.messages import BaseMessage , HumanMessage
 from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import InMemorySaver
-
+from langchain_groq import ChatGroq
 load_dotenv()
 
-llm=ChatGoogleGenerativeAI(model='gemini-3-flash-preview')
+llm=ChatGroq(model='llama-3.3-70b-versatile')
 
 class ChatState(TypedDict):
     messages: Annotated[list[BaseMessage],add_messages]
@@ -29,3 +29,4 @@ graph.add_edge(START, "chat_node")
 graph.add_edge("chat_node", END)
 
 chatbot = graph.compile(checkpointer=checkpointer)
+
