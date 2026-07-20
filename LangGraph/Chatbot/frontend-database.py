@@ -22,8 +22,9 @@ def add_thread(thread_id):
         st.session_state['chat_thread'].append(thread_id)
 
 def load_conversation(thread_id):
-    return chatbot.get_state(config={'configurable': {'thread_id':thread_id}}).values['messages']
-
+    state = chatbot.get_state(config={'configurable': {'thread_id': thread_id}})
+    # Check if messages key exists in state values, return empty list if not
+    return state.values.get('messages', [])
 #***************************** Session Setup ***********************
 
 # to store message history -> st.session
@@ -79,7 +80,13 @@ if user_input:
     with st.chat_message('user'):
         st.text(user_input)
 
-    CONFIG={'configurable': {'thread_id':st.session_state['thread_id']}}
+    CONFIG = {
+        "configurable": {"thread_id": st.session_state['thread_id']},
+        "metadata": {
+            "thread_id": st.session_state['thread_id']
+        },
+        "run_name": "chat_turn",
+    }
 
 
     with st.chat_message('assistant'):
