@@ -6,17 +6,17 @@ from langchain_core.messages import BaseMessage , HumanMessage
 from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver ,sqlite3
 from langgraph.prebuilt import ToolNode , tools_condition
-from langchain_community.tools import DuckDuckGoSearchRun
+from langchain_community.tools import DuckDuckGoSearchResults
 from langchain_core.tools import tool
 import requests
 
 load_dotenv()
 
 # --------------------- LLM ---------------------
-llm =ChatGroq(model='llama-3.3-70b-versatile')
+llm =ChatGroq(model='openai/gpt-oss-120b')
 
 #--------------------- Tools -------------
-search_tool=DuckDuckGoSearchRun(region='us-en')
+search_tool=DuckDuckGoSearchResults(region='us-en')
 
 
 @tool
