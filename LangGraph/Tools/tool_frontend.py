@@ -59,7 +59,8 @@ for message in st.session_state["message_history"]:
     with st.chat_message(message["role"]):
         st.text(message["content"])
 
-user_input = st.chat_input("Type here")
+
+user_input = st.chat_input("Type here :")
 
 if user_input:
     # Show user's message
