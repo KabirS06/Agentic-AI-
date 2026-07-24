@@ -13,7 +13,7 @@ import requests
 load_dotenv()
 
 # --------------------- LLM ---------------------
-llm =ChatGroq(model='openai/gpt-oss-120b')
+llm =ChatGroq(model='openai/gpt-oss-120b') 
 
 #--------------------- Tools -------------
 search_tool=DuckDuckGoSearchResults(region='us-en')
@@ -57,12 +57,14 @@ tools=[get_stock_prize , search_tool ,calculator]
 llm_with_tool=llm.bind_tools(tools)
 
 
-#---------------------------- State ------------
+#---------------------------- State ------------------
+
 class ChatState(TypedDict):
     messages :Annotated[list[BaseMessage ],add_messages]
 
 
-#------------------------- Nodes --------------------
+
+#------------------------- Nodes ----------------------
 def chat_node(state:ChatState):
     """LLM node that may answer or request a tool call."""
     messages=state['messages']
@@ -72,7 +74,10 @@ def chat_node(state:ChatState):
 tool_node=ToolNode(tools)
 
 
+
 #--------------------------- Checkpointer --------------------------
+
+
 conn=sqlite3.connect(database='chatbase.db', check_same_thread=False)
 checkpointer=SqliteSaver(conn=conn)
 
