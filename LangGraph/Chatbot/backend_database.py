@@ -11,7 +11,7 @@ load_dotenv()
 
 llm=ChatGroq(model='llama-3.3-70b-versatile')
 
-class ChatState(TypedDict):
+class ChatState(TypedDict): 
     messages: Annotated[list[BaseMessage],add_messages]
     
 def chat_node(state:ChatState):
