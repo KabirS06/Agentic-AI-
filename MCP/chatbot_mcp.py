@@ -11,22 +11,18 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 
 load_dotenv()
 
-llm=ChatGroq(model='openai/gpt-oss-120b')
+llm=ChatGroq(model='llama-3.3-70b-versatile')
 
 SERVERS={
     "math":{
         "transport":"stdio",
-        "command":"C:/Users/Lenovo/AppData/Roaming/Python/Python314/Scripts/uv.exe",
+        "command":"uv",
         "args":[
             "run",
             "fastmcp",
             "run",
             "/Users/Lenovo/Desktop/MCP-Multi-Context-Protocol-/Math_MCP_Server/main.py"
         ]
-    },
-    'expense':{
-        "transport":"streamable_http",
-        "url":"https://test-antardhwani.fastmcp.app/mcp"
     }
 }
 
@@ -65,7 +61,7 @@ async def build_graph():
 async def main():
     chatbot=await build_graph()
 
-    result=await chatbot.ainvoke({"messages":[HumanMessage(content="Add an expense of Rs. 200 for construction material on 29 July 2026")]})
+    result=await chatbot.ainvoke({"messages":[HumanMessage(content="print the addition of 8908 and 4444")]})
 
     print(result['messages'][-1].content)
 
