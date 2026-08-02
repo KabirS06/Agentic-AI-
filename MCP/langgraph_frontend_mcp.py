@@ -5,6 +5,7 @@ import streamlit as st
 from backend_mcp import chatbot, retrieve_all_threads, submit_async_task
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
+
 # =========================== Utilities ===========================
 def generate_thread_id():
     return uuid.uuid4()
@@ -40,6 +41,7 @@ if "chat_threads" not in st.session_state:
 
 add_thread(st.session_state["thread_id"])
 
+
 # ============================ Sidebar ============================
 st.sidebar.title("LangGraph MCP Chatbot")
 
@@ -57,6 +59,7 @@ for thread_id in st.session_state["chat_threads"][::-1]:
             role = "user" if isinstance(msg, HumanMessage) else "assistant"
             temp_messages.append({"role": role, "content": msg.content})
         st.session_state["message_history"] = temp_messages
+
 
 # ============================ Main UI ============================
 
@@ -140,3 +143,5 @@ if user_input:
     st.session_state["message_history"].append(
         {"role": "assistant", "content": ai_message}
     )
+
+    
